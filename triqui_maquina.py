@@ -10,6 +10,7 @@ contador=1
 
 #Ejecuta el juego
 def jugar():
+    a=menu_inicio()
     global ganador
     print("Empieza a jugar")
     ver_tablero()
@@ -17,13 +18,14 @@ def jugar():
         print("Turno del jugador 1 - Juega con X")
         valor="X"
         #empiezan a jugar - Jugador1
-        jugada(valor,48)
+        jugada(valor,48,a)
         hayGanador()
         if (ganador != "X")&(i < 4) :
             for j in range(3):
                 
                 valor="O"
-                jugada(valor,juega_maquina())
+                a=2
+                jugada(valor,juega_maquina(),a)
                 hayGanador()
                 if ganador == "O":
                     print("-------> LA MAQUINA HA GANADO EL TRIQUI B) <--------")
@@ -36,15 +38,25 @@ def jugar():
         else:
             print("-------> No hay ganador. El juego termina en EMPATE :/  <--------")
             menu()
+def menu_inicio():
+    aux1=int(input('\nSi desea seguir iniciar jugando ingrese 1 sino 0: '))
+    if (aux1==0):
+        a=0
+    else: 
+        a=2
+    return a
+
 #Muestra el menú para seguir jugando
 def menu():
     aux=int(input('\nSi desea seguir jugando ingrese el 0 sino el 1: '))
     if (aux==0):
         vaciar()
         jugar()
+       
     else:
         print('\n/////////////////////////  GRACIAS POR JUGAR  //////////////////////\n')
         exit(0)
+
 #Determina si hay un ganador
 def hayGanador():
     global ganador
@@ -77,26 +89,32 @@ def controlDiagonal():
     elif tablero[2] ==  tablero[4] == tablero[6] != "-":
         ganador = tablero[2]
 #Realiza la jugada 
-def jugada(valor,i):
+def jugada(valor,i,a):
     global contador
     anoto = False
-    while anoto==False:
-        if(i==48):
-            posicion = int(input("Elegir una posicion del 1 al 9: "))
-            posicion -= 1
-        else:
-            posicion=i
-            
-            
-        if tablero[posicion] == "-":
-            anoto = True
-        else:
-            print("\n////////////////////////////")
-            print("Esa posicion ya esta ocupada")
-            print("////////////////////////////\n")
-            i=48
-            contador-=20
-            ver_tablero()
+    
+    if(a==0):
+        posicion=1
+        valor='-'
+    else:
+        while anoto==False:
+            if(i==48):
+                posicion = int(input("Elegir una posicion del 1 al 9: "))
+                posicion -= 1
+            else:
+                posicion=i
+                
+                
+            if tablero[posicion] == "-":
+                anoto = True
+            else:
+                print("\n////////////////////////////")
+                print("Esa posicion ya esta ocupada")
+                print("////////////////////////////\n")
+                i=48
+                contador-=20
+                ver_tablero()
+        a=a+1
     tablero[posicion] = valor
     ver_tablero()
 #Realiza la jugada del computador
@@ -119,6 +137,9 @@ def juega_maquina():
                 aux=0
             if(tablero[6]=='X')&(tablero[3]!='O'):
                 posicion=4
+                aux=0
+            if(tablero[4]=='X')&(tablero[8]=='-'):
+                posicion=9
                 aux=0
         if(tablero[6]=='X'):
             if(tablero[3]=='X')&(tablero[0]!='O'):
@@ -171,7 +192,9 @@ def juega_maquina():
             if(tablero[8]=='X')&(tablero[0]!='O'):
                 posicion=1
                 aux=0
-
+            if(tablero[7]=='X')&(tablero[0]!='O'):
+                posicion=2
+                aux=0
             if(tablero[1]=='X')&(tablero[7]!='O'):
                 posicion=8
                 aux=0
@@ -307,6 +330,10 @@ def claves():
             posicion=7
             posicion-=1 
             aux=3
+        elif(tablero[0]=='O')&(tablero[7]=='O'):
+            posicion=4
+            posicion-=1
+            aux=3
     if(tablero[0]=='X'):
         if(tablero[7]=='X'):
             posicion=4
@@ -320,6 +347,10 @@ def claves():
             posicion=2
             posicion-=1 
             aux=3
+        elif(tablero[1]=='X'):
+            posicion=3
+            posicion-=1 
+            aux=3
     if(tablero[2]=='X'):
         if(tablero[7]=='X'):
             posicion=4
@@ -327,6 +358,11 @@ def claves():
             aux=3
         elif(tablero[3]=='X'):
             posicion=1
+            posicion-=1 
+            aux=3
+    if(tablero[4]=='X'):
+        if(tablero[8]=='X'):
+            posicion=8
             posicion-=1 
             aux=3
     return posicion,aux
