@@ -361,8 +361,28 @@ def claves():
             posicion-=1 
             aux=3
     if(tablero[4]=='X'):
-        if(tablero[8]=='X'):
+        if(tablero[7]=='X'):
+            posicion=2
+            posicion-=1 
+            aux=3
+        if(tablero[5]=='X'):
+            posicion=4
+            posicion-=1 
+            aux=3
+        if(tablero[1]=='X'):
             posicion=8
+            posicion-=1 
+            aux=3
+        if(tablero[3]=='X'):
+            posicion=6
+            posicion-=1 
+            aux=3
+        if(tablero[0]=='X'):
+            posicion=9
+            posicion-=1 
+            aux=3
+        if(tablero[2]=='X'):
+            posicion=7
             posicion-=1 
             aux=3
     return posicion,aux
