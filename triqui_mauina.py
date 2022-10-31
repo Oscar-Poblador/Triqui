@@ -5,7 +5,7 @@ tablero =[  "-", "-", "-",
              "-", "-", "-",
               "-", "-", "-"]
 ganador = None
-
+contador=1
 
 def jugar():
     global ganador
@@ -74,6 +74,7 @@ def controlDiagonal():
         ganador = tablero[2]
 
 def jugada(valor,i):
+    
     anoto = False
     while anoto==False:
         if(i==48):
@@ -84,7 +85,6 @@ def jugada(valor,i):
             
             
         if tablero[posicion] == "-":
-            print('si')
             anoto = True
         else:
             print("\n////////////////////////////")
@@ -94,126 +94,187 @@ def jugada(valor,i):
             ver_tablero()
     tablero[posicion] = valor
     ver_tablero()
+    
 def juega_maquina():
+    global contador
     anoto = False
-    while anoto==False:
-        
-        
-        if(tablero[0]!='-')|(tablero[2]!='-')|(tablero[6]!='-')|(tablero[8]!='-')|(tablero[5]!='-')&(tablero[4]=='-'):
-            posicion=5
-            empatar=1
-            
-        if(empatar==1)&(tablero[4]!='-'):
-            opc=0
-            if(tablero[6]=='X'):
-                if(tablero[3]=='X'):
-                    posicion=1
-                    opc=1
-                if(tablero[0]=='X'):
-                    posicion=4
-                    opc=1
-                if(tablero[7]=='X'):
-                    posicion=9
-                    opc=1
-                if(tablero[8]=='X'):
-                    posicion=8
-                    opc=1
-                if(tablero[1]=='X'):
-                    posicion=4
-                    opc=1
-                if(tablero[5]=='X'):
-                    posicion=8
-                    opc=1
-            if(tablero[0]=='X'):
-                if(tablero[3]=='X'):
-                    posicion=7
-                    opc=1
-                if(tablero[6]=='X'):
-                    posicion=4
-                    opc=1
-                if(tablero[1]=='X'):
-                    posicion=3
-                    opc=1
-                if(tablero[2]=='X'):
-                    posicion=2
-                    opc=1
-                if(tablero[5]=='X'):
-                    posicion=2
-                    opc=1
-                if(tablero[7]=='X'):
-                    posicion=4
-                    opc=1
-            
-            if(tablero[2]=='X'):
-                if(tablero[1]=='X'):
-                    posicion=1
-                    opc=1
-                if(tablero[0]=='X'):
-                    posicion=2
-                    opc=1
-                if(tablero[5]=='X'):
-                    posicion=9
-                    opc=1
-                if(tablero[8]=='X'):
-                    posicion=6
-                    opc=1
-                if(tablero[3]=='X'):
-                    posicion=2
-                    opc=1
-                if(tablero[7]=='X'):
-                    posicion=6
-                    opc=1
-            if(tablero[8]=='X'):
-                if(tablero[5]=='X'):
-                    posicion=3
-                    opc=1
-                if(tablero[2]=='X'):
-                    posicion=6
-                    opc=1
-                if(tablero[7]=='X'):
-                    posicion=7
-                    opc=1
-                if(tablero[6]=='X'):
-                    posicion=8
-                    opc=1
-                if(tablero[3]=='X'):
-                    posicion=8
-                    opc=1
-                if(tablero[1]=='X'):
-                    posicion=6
-                    opc=1
-            if(tablero[1]=='X')&(tablero[5]=='X'):
+    juego=""
+    regla="si"
+    while anoto==False:   
+        aux=2
+        if(tablero[0]=='X'):
+            if(tablero[1]=='X')&(tablero[2]!='O'):
+                posicion=3
+                aux=0
+            if(tablero[2]=='X')&(tablero[1]!='O'):
+                posicion=2
+                aux=0
+            if(tablero[3]=='X')&(tablero[6]!='O'):
+                posicion=7
+                aux=0
+            if(tablero[6]=='X')&(tablero[3]!='O'):
+                posicion=4
+                aux=0
+        if(tablero[6]=='X'):
+            if(tablero[3]=='X')&(tablero[0]!='O'):
                 posicion=1
-            if(tablero[0]=='X')&(tablero[1]=='X'):
+                aux=0
+            if(tablero[0]=='X')&(tablero[3]!='O'):
+                posicion=4
+                aux=0
+            if(tablero[7]=='X')&(tablero[8]!='O'):
+                posicion=9
+                aux=0
+            if(tablero[8]=='X')&(tablero[7]!='O'):
+                posicion=8
+                aux=0
+        if(tablero[8]=='X'):
+            if(tablero[5]=='X')&(tablero[2]!='O'):
                 posicion=3
-            if(tablero[1]=='X')&(tablero[8]=='X'):
+                aux=0
+            if(tablero[2]=='X')&(tablero[5]!='O'):
+                posicion=6
+                aux=0
+            if(tablero[7]=='X')&(tablero[6]!='O'):
+                posicion=7
+            if(tablero[6]=='X')&(tablero[7]!='O'):
+                posicion=8
+                aux=0
+        if(tablero[2]=='X'):
+            if(tablero[1]=='X')&(tablero[0]!='O'):
+                posicion=1
+                aux=0
+            if(tablero[0]=='X')&(tablero[1]!='O'):
+                posicion=2
+                aux=0
+            if(tablero[5]=='X')&(tablero[8]!='O'):
+                posicion=9
+                aux=0
+            if(tablero[8]=='X')&(tablero[5]!='O'):
+                posicion=6
+                aux=0
+        if(tablero[4]=='X'):
+            if(tablero[0]=='X')&(tablero[8]!='O'):
+                posicion=9
+                aux=0
+            if(tablero[2]=='X')&(tablero[6]!='O'):
+                posicion=7
+                aux=0
+            if(tablero[6]=='X')&(tablero[2]!='O'):
                 posicion=3
-            if(tablero[1]=='X')&(tablero[5]=='X')&(tablero[6]):
-                posicion=3
-            
-            
-            
-            #if(tablero[3]=='O'):
-              #  posicion=6
-             #   opc=2
-            #if(tablero[5]=='O'):
-              #  posicion=4
-             #   opc=2
+                aux=0
+            if(tablero[8]=='X')&(tablero[0]!='O'):
+                posicion=1
+                aux=0
 
-            #if(tablero[1]=='O'):
-                #posicion=8
-               # opc=2
-            #if(tablero[7]=='O'):
-                #posicion=2
-                #opc=2
-            
-                
+            if(tablero[1]=='X')&(tablero[7]!='O'):
+                posicion=8
+                aux=0
+            if(tablero[3]=='X')&(tablero[5]!='O'):
+                posicion=6
+                aux=0
+            if(tablero[5]=='X')&(tablero[3]!='O'):
+                posicion=4
+                aux=0
+            if(tablero[8]=='X')&(tablero[1]!='O'):
+                posicion=2
+                aux=0
 
-            
+        if(aux!=0):
+            juego="seguro"
+        else:
+            juego="INSEGURO"
+
+        if(juego=="seguro")&(regla=="si"):
+            if(tablero[4]=='-'):
+                posicion=5
+                aux=1
+            else:
+                if(tablero[0]=='O'):
+                    if(tablero[1]=='O'):
+                        posicion=3
+                        aux=1
+                    if(tablero[2]=='O'):
+                        posicion=2
+                        aux=1
+                    if(tablero[3]=='O'):
+                        posicion=7
+                        aux=1
+                    if(tablero[6]=='O'):
+                        posicion=4
+                        aux=1
+                if(tablero[6]=='O'):
+                    if(tablero[3]=='O'):
+                        posicion=1
+                        aux=1
+                    if(tablero[0]=='O'):
+                        posicion=4
+                        aux=1
+                    if(tablero[7]=='O'):
+                        posicion=9
+                        aux=1
+                    if(tablero[8]=='O'):
+                        posicion=8
+                        aux=1
+                if(tablero[8]=='O'):
+                    if(tablero[5]=='O'):
+                        posicion=3
+                        aux=1
+                    if(tablero[2]=='O'):
+                        posicion=6
+                        aux=1
+                    if(tablero[7]=='O'):
+                        posicion=7
+                        aux=1
+                    if(tablero[6]=='O'):
+                        posicion=8
+                        aux=1
+                if(tablero[2]=='O'):
+                    if(tablero[1]=='O'):
+                        posicion=1
+                        aux=1
+                    if(tablero[0]=='O'):
+                        posicion=2
+                        aux=1
+                    if(tablero[5]=='O'):
+                        posicion=9
+                        aux=1
+                    if(tablero[8]=='O'):
+                        posicion=6
+                        aux=1
+                if(tablero[4]=='O'):
+                    if(tablero[6]=='O'):
+                        posicion=3
+                        aux=1
+                    if(tablero[8]=='O'):
+                        posicion=1
+                        aux=1
+                    if(tablero[0]=='O'):
+                        posicion=9
+                        aux=1
+                    if(tablero[2]=='O'):
+                        posicion=7
+                        aux=1
+                
+        if(regla=="no")&(contador>3):
+            posicion=random.randrange(0,9) 
+        if(regla=="si")&(contador<3)&(tablero[4]!='-'):
+            a,aux=claves()
+            if(aux!=3):
+                posicion=random.randrange(0,9)  
+                
+    
 
                 
-                
-        posicion-=1   
+        print(juego) 
+        try:        
+            posicion-=1 
+        except:
+            posicion,aux=claves()
+            print(posicion)
+            
+
+         
        
         if tablero[posicion] == "-":
             print('a')
@@ -221,9 +282,52 @@ def juega_maquina():
         
         else:
             anoto= False
+            regla="no"
+    contador +=1
+    aux=0
     return posicion
+    
 
-
+def claves():
+    posicion=0
+    aux=1
+    if(tablero[8]=='X'):
+        if(tablero[3]=='X'):
+            posicion=7
+            posicion-=1 
+            aux=3
+        elif(tablero[1]=='X'):
+            posicion=3
+            posicion-=1
+            aux=3
+    if(tablero[6]=='X'):
+        if(tablero[1]=='X'):
+            posicion=1
+            posicion-=1 
+            aux=3
+        elif(tablero[5]=='X'):
+            posicion=7
+            posicion-=1 
+            aux=3
+    if(tablero[0]=='X'):
+        if(tablero[7]=='X'):
+            posicion=4
+            posicion-=1 
+            aux=3
+        elif(tablero[5]=='X'):
+            posicion=3
+            posicion-=1 
+            aux=3
+    if(tablero[2]=='X'):
+        if(tablero[7]=='X'):
+            posicion=4
+            posicion-=1 
+            aux=3
+        elif(tablero[3]=='X'):
+            posicion=1
+            posicion-=1 
+            aux=3
+    return posicion,aux
 
 def ver_tablero():
     print("\n")
