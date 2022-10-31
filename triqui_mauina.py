@@ -1,12 +1,14 @@
 from re import A
 import random
-
+#Tablero de juego
 tablero =[  "-", "-", "-",
              "-", "-", "-",
               "-", "-", "-"]
+#Variables de control
 ganador = None
 contador=1
 
+#Ejecuta el juego
 def jugar():
     global ganador
     print("Empieza a jugar")
@@ -24,24 +26,26 @@ def jugar():
                 jugada(valor,juega_maquina())
                 hayGanador()
                 if ganador == "O":
-                    print("La MAQUINA ha ganado el triqui :u")
+                    print("-------> LA MAQUINA HA GANADO EL TRIQUI B) <--------")
                     menu()
                 break
         elif ganador=="X":
-            print("Felicadadesss!!! Jugador 1 GANADOR del TRIQUI :D")
+            print("-------> Felicadadesss!!! HAZ GANADO el TRIQUI :D <--------")
             menu()
             break
         else:
-            print("No hay ganador. El juego termina en EMPATE :/ ")
+            print("-------> No hay ganador. El juego termina en EMPATE :/  <--------")
             menu()
+#Muestra el menú para seguir jugando
 def menu():
     aux=int(input('\nSi desea seguir jugando ingrese el 0 sino el 1: '))
     if (aux==0):
         vaciar()
         jugar()
     else:
-        print('Gracias por jugar')
+        print('\n/////////////////////////  GRACIAS POR JUGAR  //////////////////////\n')
         exit(0)
+#Determina si hay un ganador
 def hayGanador():
     global ganador
     controlLinea()
@@ -72,9 +76,9 @@ def controlDiagonal():
         ganador = tablero[0]
     elif tablero[2] ==  tablero[4] == tablero[6] != "-":
         ganador = tablero[2]
-
+#Realiza la jugada 
 def jugada(valor,i):
-    
+    global contador
     anoto = False
     while anoto==False:
         if(i==48):
@@ -91,10 +95,11 @@ def jugada(valor,i):
             print("Esa posicion ya esta ocupada")
             print("////////////////////////////\n")
             i=48
+            contador-=20
             ver_tablero()
     tablero[posicion] = valor
     ver_tablero()
-    
+#Realiza la jugada del computador
 def juega_maquina():
     global contador
     anoto = False
@@ -263,21 +268,14 @@ def juega_maquina():
             if(aux!=3):
                 posicion=random.randrange(0,9)  
                 
-    
-
                 
-        print(juego) 
         try:        
             posicion-=1 
         except:
             posicion,aux=claves()
             print(posicion)
-            
-
          
-       
         if tablero[posicion] == "-":
-            print('a')
             anoto = True
         
         else:
@@ -287,7 +285,7 @@ def juega_maquina():
     aux=0
     return posicion
     
-
+#Difine las jugadas de libro
 def claves():
     posicion=0
     aux=1
@@ -328,16 +326,18 @@ def claves():
             posicion-=1 
             aux=3
     return posicion,aux
-
+#Muestra el tablero de juego
 def ver_tablero():
     print("\n")
-    print(tablero[0] + " | " + tablero[1] + " | " +  tablero[2]  +"       1 | 2 | 3")
-    print(tablero[3] + " | " + tablero[4] + " | " +  tablero[5]  +"       4 | 5 | 6")
-    print(tablero[6] + " | " + tablero[7] + " | " +  tablero[8]  +"       7 | 8 | 9")
+    print("\t                                  \t                          ",tablero[0] + " | " + tablero[1] + " | " +  tablero[2]  +"       1 | 2 | 3")
+    print("\t                                  \t                          ",tablero[3] + " | " + tablero[4] + " | " +  tablero[5]  +"       4 | 5 | 6")
+    print("\t                                  \t                          ",tablero[6] + " | " + tablero[7] + " | " +  tablero[8]  +"       7 | 8 | 9")
     print("\n")
+#Limpia el juego para un nuevo inicio
 def vaciar():
     global ganador
     ganador=None
     for i in range(9):
         tablero[i]="-"
+
 jugar()
