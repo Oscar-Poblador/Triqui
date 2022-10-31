@@ -316,6 +316,10 @@ def claves():
             posicion=3
             posicion-=1 
             aux=3
+        elif(tablero[2]=='X'):
+            posicion=2
+            posicion-=1 
+            aux=3
     if(tablero[2]=='X'):
         if(tablero[7]=='X'):
             posicion=4
